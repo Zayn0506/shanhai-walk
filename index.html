@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山海 · 慢慢走</title>
+<style>
+  :root{
+    --bg:#fbf8f2;
+    --paper:#fffdf8;
+    --ink:#24312f;
+    --muted:#6b7b77;
+    --line:#e9e2d6;
+    --green:#5f8b74;
+    --green-soft:#e8f1ea;
+    --gold:#c49a5b;
+    --gold-soft:#fbf2e2;
+    --blue:#6f8fa3;
+    --blue-soft:#eaf2f5;
+    --rose:#c98f8a;
+    --rose-soft:#f9ece9;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(196,154,91,.10), transparent 26%),
+      radial-gradient(circle at 88% 18%, rgba(95,139,116,.11), transparent 24%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Songti SC",sans-serif;
+    line-height:1.75;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:34px 20px 70px}
+  .privacy{
+    font-size:12px;color:var(--muted);border:1px dashed var(--line);
+    background:rgba(255,255,255,.6);border-radius:12px;padding:10px 14px;margin-bottom:18px;
+  }
+  header{text-align:center;padding:42px 18px 34px}
+  .eyebrow{font-size:12px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
+  h1{font-size:38px;margin:10px 0 8px;letter-spacing:.04em}
+  h2{font-size:22px;margin:0 0 14px}
+  h3{font-size:16px;margin:18px 0 8px}
+  p{margin:8px 0}
+  .sub{color:var(--muted);font-size:15px}
+  .breath{
+    width:118px;height:118px;margin:26px auto 12px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%, #fff 0 16%, var(--green-soft) 45%, rgba(95,139,116,.18) 100%);
+    border:1px solid rgba(95,139,116,.35);
+    box-shadow:0 0 0 0 rgba(95,139,116,.28);
+    animation:breathe 8s ease-in-out infinite;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--green);font-size:14px;letter-spacing:.12em;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(.94);box-shadow:0 0 0 0 rgba(95,139,116,.22)}
+    45%{transform:scale(1.08);box-shadow:0 0 0 22px rgba(95,139,116,0)}
+    60%{transform:scale(1.08);box-shadow:0 0 0 22px rgba(95,139,116,0)}
+  }
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    padding:22px 24px;margin:16px 0;box-shadow:0 8px 28px rgba(60,50,35,.04);
+  }
+  .soft{background:linear-gradient(135deg,#fffdf8,#f4f8f3)}
+  .quote{
+    text-align:center;font-family:"Songti SC",serif;font-size:20px;line-height:1.9;
+    color:#33443f;margin:18px auto;max-width:720px;
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+  .tile{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+  .tile .k{font-size:13px;color:var(--muted)}
+  .tile .v{font-size:18px;font-weight:650;margin:6px 0 4px}
+  .timeline{position:relative;padding:14px 0 4px 26px}
+  .timeline:before{content:"";position:absolute;left:8px;top:18px;bottom:22px;width:2px;background:linear-gradient(var(--gold),var(--green),var(--blue))}
+  .step{position:relative;margin:18px 0}
+  .step:before{content:"";position:absolute;left:-23px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--green)}
+  .step b{color:var(--green)}
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .pillar{border-radius:16px;padding:16px;border:1px solid var(--line)}
+  .pillar.shan{background:var(--gold-soft)}
+  .pillar.hai{background:var(--green-soft)}
+  .pillar.xue{background:var(--blue-soft)}
+  .pillar.ren{background:var(--rose-soft)}
+  .pillar .name{font-weight:700;font-size:18px;margin-bottom:6px}
+  .pillar .desc{font-size:14px;color:var(--muted)}
+  .logic{font-size:14px;color:var(--muted);margin-top:14px;text-align:center}
+  .journal{display:grid;gap:10px;margin-top:14px}
+  .journal label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
+  input,textarea{
+    width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;
+    padding:11px 12px;font:inherit;color:var(--ink);outline:none;
+  }
+  input:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(95,139,116,.10)}
+  button{
+    border:0;border-radius:999px;background:var(--green);color:#fff;padding:9px 18px;
+    font:inherit;cursor:pointer;margin-top:6px;
+  }
+  button:active{transform:translateY(1px)}
+  .saved{font-size:13px;color:var(--green);margin-left:8px}
+  .walk{border:1px solid var(--line);border-radius:18px;background:#fff;padding:10px 14px;margin-top:14px}
+  .walk svg{width:100%;height:auto;display:block}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+  .mini{border-left:3px solid var(--green);background:var(--green-soft);padding:12px 14px;border-radius:10px;font-size:14px}
+  .mini.gold{border-color:var(--gold);background:var(--gold-soft)}
+  .mini.blue{border-color:var(--blue);background:var(--blue-soft)}
+  .mini.rose{border-color:var(--rose);background:var(--rose-soft)}
+  .letter{font-family:"Songti SC",serif;font-size:17px;line-height:2}
+  .letter .sign{text-align:right;color:var(--muted);font-size:14px;margin-top:18px}
+  .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:34px}
+  @media(max-width:640px){
+    .wrap{padding:22px 14px 50px}h1{font-size:30px}.card{padding:18px}.quote{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="privacy">这是一页安静的小页：没有外链、没有统计。它不替你做决定，只是陪你把心里那部分柔软的东西放下来。</div>
+
+  <header>
+    <div class="eyebrow">for Shanhai</div>
+    <h1>山海 · 慢慢走</h1>
+    <p class="sub">温柔，不是停下；坚定，也不是紧绷。<br>是你知道自己要去哪里，也允许自己今天先喘口气。</p>
+    <div class="breath" id="breath">吸气 · 4 秒</div>
+    <p class="sub">看着这个圆，慢慢呼吸。吸 4 秒，停 2 秒，呼 6 秒。重复三轮就好。</p>
+  </header>
+
+  <div class="card soft">
+    <div class="quote">
+      “你已经走过很远了。<br>
+      从山东莘县到上海、北京、天津；<br>
+      从纺织专业到心理学，从考研的人到讲师，再到创业的人。<br>
+      你不是没有刻度尺，你只是一直在亲手造一把。”
+    </div>
+  </div>
+
+  <h2>我看到的你</h2>
+  <div class="grid">
+    <div class="tile"><div class="k">你的底色</div><div class="v">ENFP 的火</div><div>向外连接、创造意义、把热爱变成行动。</div></div>
+    <div class="tile"><div class="k">你的安全基地</div><div class="v">INFJ 的灯</div><div>不喧哗，但稳稳亮着；不催你跑，只让你敢回头。</div></div>
+    <div class="tile"><div class="k">你已经拥有</div><div class="v">27 岁 · 一路走来的底气</div><div>1999 年生，山东聊城莘县人。不是运气，是多年一点点走出来的选择。</div></div>
+    <div class="tile"><div class="k">你真正想要</div><div class="v">自洽地蓬勃</div><div>又帅、又瘦、又从容；事业圆满，也好好活着。</div></div>
+  </div>
+
+  <div class="card">
+    <h2>你走过的路</h2>
+    <div class="timeline">
+      <div class="step"><b>山东 · 1999—2016</b>：出生在聊城莘县，五岁上小学。一个县城小孩，很早就开始往外走。</div>
+      <div class="step"><b>上海 · 2016—2020</b>：东华大学，工学 / 纺织品国际经济与贸易本科，GPA 3.8/5.0。那时你还不知道，自己后来会把“结构化表达”变成饭碗。</div>
+      <div class="step"><b>北京 · 2020—2022</b>：考入北京师范大学，读心理健康教育硕士，GPA 3.9/4.0；参与国自然青年项目、北京市教科规划重点课题，拿过北京市优秀毕业生。</div>
+      <div class="step"><b>讲师 · 2022—2024</b>：在凯程从兼职走到全国讲师，讲教育心理学、教育学原理，累计 1000h+；运营“教育学山海”微博到 20w 粉丝。你不是突然会讲，是一场一场练出来的。</div>
+      <div class="step"><b>转折 · 2024</b>：辞职，休息了大半年。东方甄选面试没成，后来你自己做了岸上见。人生有时候不是没被选中，而是要去选自己。</div>
+      <div class="step"><b>天津 · 2024—现在</b>：27 岁，带着一个跑通的模型、一个稳稳接住你的人，重新开始定义人生。</div>
+    </div>
+  </div>
+
+  <div class="card soft">
+    <h2>你的四柱，不是口号</h2>
+    <div class="pillars">
+      <div class="pillar shan"><div class="name">山 · 事业</div><div class="desc">稳而有峰。839 / 863 是你的地基，333 是远处的峰。</div></div>
+      <div class="pillar hai"><div class="name">海 · 身心</div><div class="desc">深而能容。睡眠、运动、咖啡、心悸，都是身体在说话。</div></div>
+      <div class="pillar xue"><div class="name">学 · 认知</div><div class="desc">把经验沉淀成标准、手册、方法论，别只靠灵感。</div></div>
+      <div class="pillar ren"><div class="name">人 · 关系</div><div class="desc">有人稳稳接住你，你也在学着接住自己。</div></div>
+    </div>
+    <div class="logic">身体托举精力 → 精力支撑事业 → 事业沉淀认知 → 认知反哺他人 → 成就感回补身心。</div>
+  </div>
+
+  <div class="card">
+    <h2>当心里突突的时候</h2>
+    <div class="steps">
+      <div class="mini">先放下咖啡杯。今天剩下的时间，喝温水就好。</div>
+      <div class="mini gold">把“我要财富自由”改成“我今晚只睡好”。</div>
+      <div class="mini blue">出门走 15 分钟。不听课、不复盘、不想战略。</div>
+      <div class="mini rose">如果心悸持续或胸闷，去查个心电图。这不是脆弱，是照顾自己。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>给今天的你 · 三行日志</h2>
+    <p class="sub">事业一句、身心一句、值得记一句。写下来，只有你自己能看见。</p>
+    <div class="journal">
+      <div><label>事业一句：今天推进了什么？</label><input id="line1" placeholder="例如：推进了一件重要的事"></div>
+      <div><label>身心一句：身体和情绪是什么状态？</label><input id="line2" placeholder="例如：咖啡喝多了，有点紧张，想早点睡"></div>
+      <div><label>值得记一句：有什么洞察、素材或小小的好？</label><input id="line3" placeholder="例如：有人稳稳接住我，我才能往外走"></div>
+      <div><button id="save">存下今天</button><span class="saved" id="saved"></span></div>
+    </div>
+  </div>
+
+  <div class="walk">
+    <svg viewBox="0 0 900 210" role="img" aria-label="一个人在路上行走">
+      <path d="M40 165 C160 120, 240 190, 360 145 C480 100, 560 170, 680 125 C760 95, 820 105, 870 80" fill="none" stroke="#c49a5b" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 10"/>
+      <g transform="translate(650 90)">
+        <circle cx="0" cy="0" r="10" fill="#5f8b74"/>
+        <path d="M0 10 L0 48 M0 20 L-22 36 M0 20 L22 32 M0 48 L-18 75 M0 48 L20 72" stroke="#5f8b74" stroke-width="6" stroke-linecap="round" fill="none"/>
+      </g>
+      <text x="45" y="55" font-size="16" fill="#6b7b77">路不必一次看清，走一步，就亮一步。</text>
+      <text x="45" y="85" font-size="14" fill="#9a8a72">你已经不是当年那个五岁上小学、独自往外走的小孩了。</text>
+    </svg>
+  </div>
+
+  <div class="card letter">
+    <h2>一封很短的信</h2>
+    <p>山海，今天你不用证明什么。</p>
+    <p>你从山东莘县走到上海，从北京走到天津；从纺织专业走到心理学，从北师大硕士走到凯程全国讲师，再到岸上见创始人。你经历过不被选中，也经历过一些难熬的时刻；现在终于遇到一个能把生活稳稳接住的人。你不要求对方带你飞，对方让你敢落地——这已经很珍贵。</p>
+    <p>你简历里写着 1000h+ 讲课、20w 微博粉丝、3.9/4.0 的硕士绩点、北京市优秀毕业生、清华积极心理学指导师。这些不是冷冰冰的数字，是你认真活过的证据。东方甄选那次没去成，后来你把自己活成了自己的选择。</p>
+    <p>事业上你会慢慢学会当老板：招人、管理、分钱、定标准。你现在不懂，不代表你永远不懂。你最会的事，本来就是把复杂的东西拆成人能走的路。管理也一样，只是一种更大的“教学设计”。</p>
+    <p>你不必把所有未来扛在今晚。35 岁也好，40 岁也好，任何数字也好，333 也好，都只是路标，不是判决。今晚只做一件小事，睡一个好觉，明天再走。</p>
+    <p>你可以温柔，也可以坚定；可以想哭，也可以继续往前。两种都不冲突。</p>
+    <div class="sign">—— 陪你复盘的人</div>
+  </div>
+
+  <div class="footer">愿你慢慢走，稳稳亮。此页没有云端同步，刷新后日志仍保存在本机浏览器中。</div>
+</div>
+
+<script>
+var breath = document.getElementById('breath');
+var on = true;
+setInterval(function(){
+  if(!on){return;}
+  var text = breath.textContent;
+  if(text.indexOf('吸气') === 0){breath.textContent='停留 · 2 秒';}
+  else if(text.indexOf('停留') === 0){breath.textContent='呼气 · 6 秒';}
+  else {breath.textContent='吸气 · 4 秒';}
+}, 4000);
+document.getElementById('save').addEventListener('click', function(){
+  var a = document.getElementById('line1').value;
+  var b = document.getElementById('line2').value;
+  var c = document.getElementById('line3').value;
+  var d = new Date().toISOString().slice(0,10);
+  localStorage.setItem('shanhai-diary-'+d, JSON.stringify({a:a,b:b,c:c}));
+  document.getElementById('saved').textContent='已存下，今天辛苦啦。';
+});
+var d0 = new Date().toISOString().slice(0,10);
+var old = localStorage.getItem('shanhai-diary-'+d0);
+if(old){
+  try{
+    var o=JSON.parse(old);
+    document.getElementById('line1').value=o.a||'';
+    document.getElementById('line2').value=o.b||'';
+    document.getElementById('line3').value=o.c||'';
+  }catch(e){}
+  document.getElementById('saved').textContent='今天的日志已经在这里了。';
+}
+on = true;
+</script>
+</body>
+</html>
